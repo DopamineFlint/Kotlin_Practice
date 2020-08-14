@@ -17,7 +17,7 @@ abstract class AbstractWarrior(maxH: Int, ahc: Int, acc: Int, weap: AbstractWeap
             weapon.getAmmoQueue()
             val acAvoid: Int = accuracy - enemy.avoidHitChance
             if (acAvoid < Random.nextInt(0, 100)) {
-                enemy.getHit(weapon.createBullet().currentDamageCalculation())
+                enemy.getHit(weapon.createBullet().currentDamageCalculation()) //.currentDamageCalculation()
             }
         }
     }

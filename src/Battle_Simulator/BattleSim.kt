@@ -1,13 +1,10 @@
 package Battle_Simulator
 
-import java.util.*
-
 fun main() {
     print("Input size team -> ")
-    val scan = Scanner(System.`in`)
-    val teamSize: Int = scan.nextLine().trim().toInt()
+    val line = readLine()?.toInt() ?: 10
 
-    val battle = Battle(teamSize)
+    val battle = Battle(line)
     while (!battle.isBattleOver) {
         println(battle.getBattleState().message)
     }

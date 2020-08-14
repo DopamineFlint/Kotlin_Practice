@@ -2,7 +2,7 @@ package Battle_Simulator
 
 import kotlin.random.Random
 
-enum class Ammo(private val damage: Int, private val criticalChance: Int, private val coefficient: Int) { //стоит ли делать свойства приватными?
+enum class Ammo(private val damage: Int, private val criticalChance: Int, private val coefficient: Int) {
     STANDARD(15, 5, 2),
     HP(35, 15, 3);
 

@@ -1,7 +1,6 @@
 package Battle_Simulator
 
 abstract class AbstractWeapon(val maxAmmo: Int, val fireType: FireType) {
-    private var x: Int = 0
     private var cal: MutableList<Ammo> = mutableListOf()
     private val weapFireType: FireType = fireType
 
@@ -12,37 +11,37 @@ abstract class AbstractWeapon(val maxAmmo: Int, val fireType: FireType) {
     abstract fun createBullet(): Ammo
 
     fun reload() {
+        var reloadCounter = 0
         if (isReloadNeeded()) {
-            while (x < maxAmmo) {
+            while (reloadCounter < maxAmmo) {
                 cal.add(createBullet())
-                x++
+                reloadCounter++
             }
-            x = 0
         }
     }
 
     fun getAmmoQueue() {
+        var ammoQueueCounter = 0
         if (!isReloadNeeded()) {
             if (weapFireType.ammoCount == 1) {
-                while (x < weapFireType.ammoCount) {
+                while (ammoQueueCounter < weapFireType.ammoCount) {
                     cal.removeAt(cal.size - 1)
-                    x++
+                    ammoQueueCounter++
                 }
             }
 
             if (weapFireType.ammoCount == 3) {
-                while (x < weapFireType.ammoCount) {
+                while (ammoQueueCounter < weapFireType.ammoCount) {
                     if (!isReloadNeeded()) {
                         cal.removeAt(cal.size - 1)
-                        x++
+                        ammoQueueCounter++
                     } else {
-                        x++
+                        ammoQueueCounter++
                     }
                 }
             }
         } else {
             reload()
         }
-        x = 0
     }
 }
