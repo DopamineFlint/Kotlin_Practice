@@ -23,15 +23,15 @@ abstract class AbstractWeapon(val maxAmmo: Int, val fireType: FireType) {
     fun getAmmoQueue() {
         var ammoQueueCounter = 0
         if (!isReloadNeeded()) {
-            if (weapFireType.ammoCount == 1) {
-                while (ammoQueueCounter < weapFireType.ammoCount) {
+            if (weapFireType.ammoC == 1) {
+                while (ammoQueueCounter < weapFireType.ammoC) {
                     cal.removeAt(cal.size - 1)
                     ammoQueueCounter++
                 }
             }
 
-            if (weapFireType.ammoCount == 3) {
-                while (ammoQueueCounter < weapFireType.ammoCount) {
+            if (weapFireType.ammoC == 3) {
+                while (ammoQueueCounter < weapFireType.ammoC) {
                     if (!isReloadNeeded()) {
                         cal.removeAt(cal.size - 1)
                         ammoQueueCounter++
