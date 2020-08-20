@@ -1,5 +1,6 @@
 package Battle_Simulator
 
+import kotlin.math.max
 import kotlin.random.Random
 
 class Battle(teamSize: Int = 1) {
@@ -37,46 +38,17 @@ class Battle(teamSize: Int = 1) {
         team1.teamShuffle()
         team2.teamShuffle()
 
-        team1.warriorList.forEach {
-            if (!it.isKilled) {
-                var i: Int
-                while (true) {
-                    i = Random.nextInt(0, team2.warriorsCount)
+        val teamFilteredOne = team1.warriorList.filter { !it.isKilled }
+        val teamFilteredTwo = team2.warriorList.filter { !it.isKilled }
 
-                    if (team2.showOverallHealth() <= 0) {
-                        break
-                    }
+        println(teamFilteredOne.size)
+        println(teamFilteredTwo.size)
 
-                    if (!team2.warriorList[i].isKilled) {
-                        break
-                    }
-                }
-                if (!team2.warriorList[i].isKilled) {
-                    it.attack(team2.warriorList[i])
-                    bsp.updateStatus(team1.showOverallHealth(), team2.showOverallHealth())
-                }
-            }
+        for (i in 0..max(teamFilteredOne.size, teamFilteredTwo.size)) {
+            println(i)
+            teamFilteredOne.getOrNull(i)?.attack(teamFilteredTwo[Random.nextInt(0, teamFilteredTwo.size)])
+            teamFilteredTwo.getOrNull(i)?.attack(teamFilteredOne[Random.nextInt(0, teamFilteredOne.size)])
         }
-
-        team2.warriorList.forEach {
-            if (!it.isKilled) {
-                var i: Int
-                while (true) {
-                    i = Random.nextInt(0, team1.warriorsCount)
-
-                    if (team1.showOverallHealth() <= 0) {
-                        break
-                    }
-
-                    if (!team1.warriorList[i].isKilled) {
-                        break
-                    }
-                }
-                if (!team1.warriorList[i].isKilled) {
-                    it.attack(team1.warriorList[i])
-                    bsp.updateStatus(team1.showOverallHealth(), team2.showOverallHealth())
-                }
-            }
-        }
+        bsp.updateStatus(team1.showOverallHealth(), team2.showOverallHealth())
     }
 }
